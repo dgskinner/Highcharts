@@ -1,6 +1,16 @@
-var app = angular.module("myApp", []);
+var app = angular.module("highchartsApp", []);
 
-app.controller("myCtrl", function($scope) {
+app.directive("highcharts", function() {
+    return {
+        link: function(scope, el, attrs) {
+            var options = scope.$eval(attrs.highcharts);
+            options.chart.renderTo = el[0];
+            new Highcharts.Chart(options);
+        }
+    };
+});
+
+app.controller("donutChartController", function($scope) {
     var dataset = [
         ["Registration Fee", 341],
         ["Meals", 204],
@@ -94,16 +104,6 @@ app.controller("myCtrl", function($scope) {
         },
         exporting: {
             enabled: false
-        }
-    };
-});
-
-app.directive("highcharts", function() {
-    return {
-        link: function(scope, el, attrs) {
-            var options = scope.$eval(attrs.highcharts);
-            options.chart.renderTo = el[0];
-            new Highcharts.Chart(options);
         }
     };
 });
