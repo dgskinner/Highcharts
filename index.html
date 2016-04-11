@@ -6,10 +6,16 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="donutChartController.js"></script>
+        <script type="text/javascript" src="barChartController.js"></script>
     </head>
     <body ng-app="highchartsApp">
         <div ng-controller="donutChartController">
-            <div highcharts="chartOptions" id="container" style="min-width: 310px; height: 400px; max-width: 800px;"></div>
+            <div highcharts="chartOptions" class="donut-chart-container"></div>
+        </div>
+
+        <div ng-controller="barChartController">
+            <div highcharts="chartOptions" class="bar-chart-container"></div>
         </div>
     </body>
 </html>
