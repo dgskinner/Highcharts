@@ -1,9 +1,13 @@
 var app = angular.module("highchartsApp", []);
 
-app.directive("highcharts", function() {
+app.directive("highchart", function() {
     return {
+        scope: {
+            config: '='
+        },
+        restrict: 'E',
         link: function(scope, el, attrs) {
-            var options = scope.$eval(attrs.highcharts);
+            var options = scope.config;
             options.chart.renderTo = el[0];
             new Highcharts.Chart(options);
         }

@@ -1,11 +1,19 @@
 app.controller("barChartController", function($scope) {
-    var dataset;
+    var dataset = [
+        {
+            name: "Standard 1",
+            value: 31
+        },
+    ];
+    
+    var highActivityColors = ["#5C90CD", "#DC7247"];
+    var lowActivityColors = ["#E9C238", "#23D3D3"];
 
     $scope.chartOptions = {
         chart: {
             type: 'bar',
         },
-        colors: ["#5C90CD", "#DC7247"],
+        colors: highActivityColors,
         title: {
             text: null
         },

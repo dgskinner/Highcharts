@@ -11,11 +11,13 @@
     </head>
     <body ng-app="highchartsApp">
         <div ng-controller="donutChartController">
-            <div highcharts="chartOptions" class="donut-chart-container"></div>
+            <highchart config="chartOptions" class="donut-chart-container">
+            </highchart>
         </div>
 
         <div ng-controller="barChartController">
-            <div highcharts="chartOptions" class="bar-chart-container"></div>
+            <highchart config="chartOptions" class="bar-chart-container"></highchart>
+            <highchart config="chartOptions" class="bar-chart-container"></highchart>
         </div>
     </body>
 </html>

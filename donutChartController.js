@@ -1,4 +1,5 @@
 app.controller("donutChartController", function($scope) {
+
     var dataset = [
         ["Registration Fee", 341],
         ["Meals", 204],
@@ -24,7 +25,6 @@ app.controller("donutChartController", function($scope) {
     // vertically center legend based on title/subtitle text size
     // approximate - works reasonably well for medium font sizes
     var legendTranslateY = (titleFontSize + subtitleFontSize + 12) / 2;
-
 
     $scope.chartOptions =  {
         chart: {
