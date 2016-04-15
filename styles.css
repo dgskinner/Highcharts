@@ -17,3 +17,10 @@ body {
     width: 800px;
     height: 200px;
 }
+
+.bar-chart-divider {
+    height: 2px;
+    width: 550px;
+    background-color: lightgray;
+    margin-left: 58px;
+}
