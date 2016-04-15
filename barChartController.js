@@ -50,29 +50,41 @@ app.controller("barChartController", function($scope) {
             value: 25
         }
     ];
-    var highest, secondHighest, lowest, secondLowest;
-    rawData.forEach(function (item) {
-        // do stuff here
-    });
-    var dataset1 = [];
-    var dataset2 = [];
-    dataset1 = [{
-        name: 'Standard 6',
-        data: [52]
-    }, {
-        name: 'Standard 2',
-        data: [46]
-    }];
-    dataset2 = [{
-        name: 'Standard 11',
-        data: [3]
-    }, {
-        name: 'Standard 9',
-        data: [12]
-    }];
+
+    var highest = rawData[0],
+        secondHighest = rawData[0],
+        lowest = rawData[0],
+        secondLowest = rawData[0];
+
+    for (var i = 1; i < rawData.length; i++) {
+        if (rawData[i].value > highest.value) {
+            secondHighest = highest;
+            highest = rawData[i];
+        } else if (rawData[i].value > secondHighest.value) {
+            secondHighest = rawData[i];
+        } else if (rawData[i].value < lowest.value) {
+            secondLowest = lowest;
+            lowest = rawData[i];
+        } else if (rawData[i].value < secondLowest.value) {
+            secondLowest = rawData[i];
+        }
+    }
+
+    var dataset1 = [highest, secondHighest];
+    var dataset2 = [lowest, secondLowest];
+
+    function groomDataForHighcharts (dataset) {
+        dataset.forEach(function (item) {
+            item.data = [item.value];
+        });
+    }
+    groomDataForHighcharts(dataset1);
+    groomDataForHighcharts(dataset2);
 
     var highActivityColors = ["#5C90CD", "#DC7247"];
     var lowActivityColors = ["#E9C238", "#23D3D3"];
+    var yAxisMax1 = 1.5 * Math.max(dataset1[0].data, dataset1[1].data);
+    var yAxisMax2 = 4 * Math.max(dataset2[0].data, dataset2[1].data);
 
     $scope.chartOptions1 = {
         chart: {
@@ -101,7 +113,7 @@ app.controller("barChartController", function($scope) {
                 useHTML: true,
                 style: {
                     // increase space between label and axis
-                    // 1px here does gives much more padding than 1px
+                    // 1px here does gives much more padding than 1px (weird)
                     "paddingBottom": "1px"
                 }
             }
@@ -114,8 +126,8 @@ app.controller("barChartController", function($scope) {
             title: {
                 text: null
             },
-            // twice the max data point?
-            max: 52
+            // 3/2 times the max data point
+            max: yAxisMax1
         },
         tooltip: {
             enabled: false
@@ -187,8 +199,8 @@ app.controller("barChartController", function($scope) {
             title: {
                 text: null
             },
-            // twice the max data point?
-            max: 24
+            // 4 times the max data point?
+            max: yAxisMax2
         },
         tooltip: {
             enabled: false

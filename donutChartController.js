@@ -1,4 +1,4 @@
-app.controller("donutChartController", function($scope) {
+app.controller("donutChartController", function($scope, globalHighchartOptions) {
 
     var dataset = [
         ["Registration Fee", 341],
@@ -26,7 +26,7 @@ app.controller("donutChartController", function($scope) {
     // approximate - works reasonably well for medium font sizes
     var legendTranslateY = (titleFontSize + subtitleFontSize + 12) / 2;
 
-    $scope.chartOptions =  {
+    var highchartOptions =  {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -86,12 +86,8 @@ app.controller("donutChartController", function($scope) {
             colorByPoint: true,
             data: dataset,
             innerSize: innerDiameter,
-        }],
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        }
+        }]
     };
+
+    $scope.chartOptions = angular.extend(highchartOptions, globalHighchartOptions);
 });
