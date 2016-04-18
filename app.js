@@ -1,6 +1,6 @@
 var app = angular.module("highchartsApp", []);
 
-app.directive("highchart", function() {
+app.directive("highchart", function () {
     return {
         scope: {
             config: '='
@@ -12,15 +12,4 @@ app.directive("highchart", function() {
             new Highcharts.Chart(options);
         }
     };
-});
-
-app.factory("globalHighchartOptions", function () {
-    return {
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
-        }
-    }
 });

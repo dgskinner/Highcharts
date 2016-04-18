@@ -1,52 +1,26 @@
-app.controller("donutChartController", function($scope, globalHighchartOptions) {
+app.controller("donutChartController", function($scope, donutChartDataService, globalHighchartOptions) {
 
-    var dataset = [
-        ["Registration Fee", 341],
-        ["Meals", 204],
-        ["Lodging", 171],
-        ["Tolls", 123],
-        ["Transportation", 109],
-        ["Other", 78]
-    ];
-
-    // if we use ES2015, these should really be declared as constants
-    var chartColors = ["#E9C238", "#5C90CD", "#23D3D3", "#ED8F35", "#DC7247", "#A5E069"];
-    var chartTitle = "COST TYPE BREAKDOWN";
-    var chartSubtitle = "Total Spent and Budget Breakdown";
-    var diameter = 300;
-    var innerDiameter = "45%";
-    var containerWidth = diameter * 2;
-    var pieCenterX = (diameter / 2) + 20;
-    var titleFontSize = 20;
-    var titleFontSizeString = titleFontSize.toString() + "px";
-    var subtitleFontSize = 14;
-    var subtitleFontSizeString = subtitleFontSize.toString() + "px";
-
-    // vertically center legend based on title/subtitle text size
-    // approximate - works reasonably well for medium font sizes
-    var legendTranslateY = (titleFontSize + subtitleFontSize + 12) / 2;
-
-    var highchartOptions =  {
+    var donutChartOptions =  {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
             type: "pie",
-            width: containerWidth
+            width: donutChartDataService.containerWidth
         },
-        colors: chartColors,
+        colors: donutChartDataService.chartColors,
         title: {
-            text: chartTitle,
+            text: donutChartDataService.chartTitle,
             align: "left",
             style: {
-                "fontSize": titleFontSizeString
+                "fontSize": donutChartDataService.titleFontSizeString
             }
         },
         subtitle: {
-            text: chartSubtitle,
+            text: donutChartDataService.chartSubtitle,
             align: "left",
             style: {
-                "fontSize": subtitleFontSizeString
+                "fontSize": donutChartDataService.subtitleFontSizeString
             }
         },
         tooltip: {
@@ -60,8 +34,8 @@ app.controller("donutChartController", function($scope, globalHighchartOptions) 
                     enabled: false
                 },
                 showInLegend: true,
-                center: [pieCenterX, null],
-                size: diameter,
+                center: [donutChartDataService.pieCenterX, null],
+                size: donutChartDataService.diameter,
                 borderWidth: 0
             }
         },
@@ -78,16 +52,16 @@ app.controller("donutChartController", function($scope, globalHighchartOptions) 
             symbolWidth: 20,
             symbolRadius: 10,
             verticalAlign: "middle",
-            x: pieCenterX,
+            x: donutChartDataService.pieCenterX,
             useHTML: true,
-            y: legendTranslateY
+            y: donutChartDataService.legendTranslateY
         },
         series: [{
             colorByPoint: true,
-            data: dataset,
-            innerSize: innerDiameter,
+            data: donutChartDataService.dataset,
+            innerSize: donutChartDataService.innerDiameter,
         }]
     };
 
-    $scope.chartOptions = angular.extend(highchartOptions, globalHighchartOptions);
+    $scope.chartOptions = angular.extend(donutChartOptions, globalHighchartOptions);
 });
