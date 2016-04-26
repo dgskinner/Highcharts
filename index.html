@@ -37,13 +37,15 @@
             <!-- </div> -->
             <!-- <div ng-controller="highActivityBarChartController"> -->
                 <highchart config="highActivityBarChartOptions"
-                    refresh-event-name="duncan"
+                    refresh-event-name="highActivityBarChartRefresh"
                     class="bar-chart-container"></highchart>
             <!-- </div> -->
             <div class="bar-chart-divider"></div>
-            <div ng-controller="lowActivityBarChartController">
-                <highchart config="chartOptions" class="bar-chart-container"></highchart>
-            </div>
+            <!-- <div ng-controller="lowActivityBarChartController"> -->
+                <highchart config="lowActivityBarChartOptions"
+                    refresh-event-name="lowActivityBarChartRefresh"
+                    class="bar-chart-container"></highchart>
+            <!-- </div> -->
         </div>
     </body>
 </html>
