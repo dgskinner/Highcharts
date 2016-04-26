@@ -11,7 +11,6 @@
         <script type="text/javascript" src="donutChartController.js"></script>
         <script type="text/javascript" src="barChartDataService.js"></script>
         <script type="text/javascript" src="highActivityBarChartController.js"></script>
-        <script type="text/javascript" src="lowActivityBarChartController.js"></script>
     </head>
 
     <body ng-app="highchartsApp">
@@ -19,10 +18,10 @@
             <highchart config="chartOptions" class="donut-chart-container"></highchart>
         </div>
 
-        <div ng-controller="barChartsController">
+        <div ng-controller="barChartsController" class="widget-container">
 
 
-            <div class="widget-title-block">
+            <div class="widget-title-container">
                 <h1 class="widget-title">ACTIVITIES BY STANDARD</h1>
                 <h2 class="widget-subtitle">Number of Activities Per Standard</h2>
             </div>
@@ -31,7 +30,8 @@
                 <select ng-options="option.buildingName for option in barChartData.rawData track by option.index"
                     ng-init="something = something || barChartData.rawData[0]"
                     ng-model="something"
-                    ng-change="changeBuildingData(something)">
+                    ng-change="changeBuildingData(something)"
+                    class="building-select">
 <!--                     <option ng-repeat="item in dataset" value="">{{ item.buildingName }}</option> -->
                 </select>
             <!-- </div> -->

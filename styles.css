@@ -26,6 +26,14 @@ body {
     margin-left: 58px;
 }
 
+.widget-container {
+    width: 800px;
+}
+
+.widget-title-container {
+    display: inline-block;
+}
+
 .widget-title {
     color: #333333;
     font-size: 20px;
@@ -38,4 +46,9 @@ body {
     font-size: 14px;
     font-weight: 400;
     margin-left: 18px;
+}
+
+.building-select {
+    float: right;
+    margin: 30px;
 }
