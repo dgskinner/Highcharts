@@ -119,7 +119,6 @@ app.service("barChartDataService", function () {
         });
     }
     addIndexesToRawData();
-    console.log(_barChartData.rawData);
 
     // add 'data' property to format datasets for highcharts
     // and 'name' property for data labels to work properly
@@ -155,25 +154,16 @@ app.service("barChartDataService", function () {
             }
         }
 
-        // groomDataForHighcharts(highActivityDataset);
-        // groomDataForHighcharts(lowActivityDataset);
-
-        _barChartData.activeIndex = activeIndex;
         _barChartData.highActivityDataset = groomDataForHighcharts([highest, secondHighest]);
         _barChartData.lowActivityDataset = groomDataForHighcharts([lowest, secondLowest]);
-        console.log(_barChartData.highActivityDataset, _barChartData.lowActivityDataset);
         _barChartData.yAxisMaxHighActivity = 1.5 * highest.value;
         _barChartData.yAxisMaxLowActivity = 4 * secondLowest.value;
     }
-
     // show data for the first building in the list by default
     _barChartData.getDataForBuilding(0);
 
-    // _barChartData.activeIndex = activeIndex;
-    // _barChartData.highActivityDataset = highActivityDataset;
-    // _barChartData.lowActivityDataset = lowActivityDataset;
-    _barChartData.highActivityColors = ["#5C90CD", "#DC7247"];
-    _barChartData.lowActivityColors = ["#E9C238", "#23D3D3"];
+    // _barChartData.highActivityColors = ["#5C90CD", "#DC7247"];
+    // _barChartData.lowActivityColors = ["#E9C238", "#23D3D3"];
 
     return _barChartData;
 });
