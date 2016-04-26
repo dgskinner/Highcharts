@@ -1,10 +1,11 @@
-app.controller("lowActivityBarChartController", function($scope, barChartDataService, globalHighchartOptions) {
+app.factory("barChartOptions", function (barChartDataService, globalHighchartOptions) {
+
+    var _barChartOptions = {};
 
     var barChartOptions = {
         chart: {
             type: 'bar',
         },
-        colors: barChartDataService.lowActivityColors,
         title: {
             text: null
         },
@@ -12,10 +13,9 @@ app.controller("lowActivityBarChartController", function($scope, barChartDataSer
             text: null
         },
         xAxis: {
-            // can either put "HIGH ACTIVITY" as category or title text
+            // can either put "HIGH/LOW ACTIVITY" as category or title text
             categories: [""],
             title: {
-                text: "HIGH ACTIVITY",
                 style: {
                     "fontSize": "18px"
                 }
@@ -39,9 +39,7 @@ app.controller("lowActivityBarChartController", function($scope, barChartDataSer
             },
             title: {
                 text: null
-            },
-            // 3/2 times the max data point
-            max: barChartDataService.yAxisMaxLowActivity
+            }
         },
         tooltip: {
             enabled: false
@@ -63,15 +61,23 @@ app.controller("lowActivityBarChartController", function($scope, barChartDataSer
         },
         legend: {
             enabled: false
-        },
-        credits: {
-            enabled: false
-        },
-        series: barChartDataService.lowActivityDataset,
-        exporting: {
-            enabled: false
         }
     };
 
-    $scope.chartOptions = angular.extend(barChartOptions, globalHighchartOptions);
+    barChartOptions = angular.extend({}, barChartOptions, globalHighchartOptions);
+
+    _barChartOptions.highActivityOptions = angular.merge({}, barChartOptions);
+    _barChartOptions.highActivityOptions.colors = ["#5C90CD", "#DC7247"];
+    _barChartOptions.highActivityOptions.xAxis.title.text = "HIGH ACTIVITY";
+    _barChartOptions.highActivityOptions.yAxis.max = barChartDataService.yAxisMaxHighActivity;
+    _barChartOptions.highActivityOptions.series = barChartDataService.highActivityDataset;
+
+    _barChartOptions.lowActivityOptions = angular.merge({}, barChartOptions);
+    _barChartOptions.lowActivityOptions.colors = ["#E9C238", "#23D3D3"];
+    _barChartOptions.lowActivityOptions.xAxis.title.text = "LOW ACTIVITY";
+    _barChartOptions.lowActivityOptions.yAxis.max = barChartDataService.yAxisMaxLowActivity;
+    _barChartOptions.lowActivityOptions.series = barChartDataService.lowActivityDataset;
+
+    console.log(_barChartOptions);
+    return _barChartOptions;
 });
