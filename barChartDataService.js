@@ -7,52 +7,52 @@ app.service("barChartDataService", function () {
             buildingName: "Victoria County High School",
             standards: [
                 {
-                    standardName: "Standard 1",
+                    standardTitle: "Standard 1",
                     value: 31
                 },
                 {
-                    standardName: "Standard 2",
+                    standardTitle: "Standard 2",
                     value: 46
                 },
                 {
-                    standardName: "Standard 3",
+                    standardTitle: "Standard 3",
                     value: 30
                 },
                 {
-                    standardName: "Standard 4",
+                    standardTitle: "Standard 4",
                     value: 22
                 },
 
                 {
-                    standardName: "Standard 5",
+                    standardTitle: "Standard 5",
                     value: 15
                 },
                 {
-                    standardName: "Standard 6",
+                    standardTitle: "Standard 6",
                     value: 52
                 },
                 {
-                    standardName: "Standard 7",
+                    standardTitle: "Standard 7",
                     value: 42
                 },
                 {
-                    standardName: "Standard 8",
+                    standardTitle: "Standard 8",
                     value: 39
                 },
                 {
-                    standardName: "Standard 9",
+                    standardTitle: "Standard 9",
                     value: 12
                 },
                 {
-                    standardName: "Standard 10",
+                    standardTitle: "Standard 10",
                     value: 14
                 },
                 {
-                    standardName: "Standard 11",
+                    standardTitle: "Standard 11",
                     value: 3
                 },
                 {
-                    standardName: "Standard 12",
+                    standardTitle: "Standard 12",
                     value: 25
                 }
             ]
@@ -61,52 +61,52 @@ app.service("barChartDataService", function () {
             buildingName: "Madison East High School",
             standards: [
                 {
-                    standardName: "Standard 1",
+                    standardTitle: "Standard 1",
                     value: 31
                 },
                 {
-                    standardName: "Standard 2",
+                    standardTitle: "Standard 2",
                     value: 42
                 },
                 {
-                    standardName: "Standard 3",
+                    standardTitle: "Standard 3",
                     value: 57
                 },
                 {
-                    standardName: "Standard 4",
+                    standardTitle: "Standard 4",
                     value: 22
                 },
 
                 {
-                    standardName: "Standard 5",
+                    standardTitle: "Standard 5",
                     value: 15
                 },
                 {
-                    standardName: "Standard 6",
+                    standardTitle: "Standard 6",
                     value: 48
                 },
                 {
-                    standardName: "Standard 7",
+                    standardTitle: "Standard 7",
                     value: 42
                 },
                 {
-                    standardName: "Standard 8",
+                    standardTitle: "Standard 8",
                     value: 39
                 },
                 {
-                    standardName: "Standard 9",
+                    standardTitle: "Standard 9",
                     value: 12
                 },
                 {
-                    standardName: "Standard 10",
+                    standardTitle: "Standard 10",
                     value: 4
                 },
                 {
-                    standardName: "Standard 11",
+                    standardTitle: "Standard 11",
                     value: 13
                 },
                 {
-                    standardName: "Standard 12",
+                    standardTitle: "Standard 12",
                     value: 7
                 }
             ]
@@ -122,9 +122,11 @@ app.service("barChartDataService", function () {
     console.log(_barChartData.rawData);
 
     // add 'data' property to format datasets for highcharts
+    // and 'name' property for data labels to work properly
     function groomDataForHighcharts (dataset) {
         dataset.forEach(function (item) {
             item.data = [item.value];
+            item.name = item.standardTitle;
         });
         return dataset;
     }

@@ -62,7 +62,7 @@ app.controller("barChartsController", function ($scope, barChartDataService) {
             bar: {
                 dataLabels: {
                     enabled: true,
-                    format: "{series.standardName}{point.standardName}<br>{y} Activities",
+                    format: "{series.name}<br>{y} Activities",
                     padding: 18,
                     style: {
                         "fontSize": "18px",
@@ -100,7 +100,7 @@ app.controller("barChartsController", function ($scope, barChartDataService) {
             // can either put "HIGH ACTIVITY" as category or title text
             categories: [""],
             title: {
-                text: "HIGH ACTIVITY",
+                text: "LOW ACTIVITY",
                 style: {
                     "fontSize": "18px"
                 }
