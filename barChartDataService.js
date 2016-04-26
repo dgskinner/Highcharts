@@ -2,7 +2,7 @@ app.service("barChartDataService", function () {
 
     var _barChartData = {};
 
-    var rawData = [
+    _barChartData.rawData = [
         {
             buildingName: "Victoria County High School",
             standards: [
@@ -113,43 +113,63 @@ app.service("barChartDataService", function () {
         }
     ];
 
-    var activeIndex = 0;
-    var schoolStandards = rawData[activeIndex].standards;
-    var highest = schoolStandards[0],
-        secondHighest = schoolStandards[0],
-        lowest = schoolStandards[0],
-        secondLowest = schoolStandards[0];
-
-    for (var i = 1; i < schoolStandards.length; i++) {
-        if (schoolStandards[i].value > highest.value) {
-            secondHighest = highest;
-            highest = schoolStandards[i];
-        } else if (schoolStandards[i].value > secondHighest.value) {
-            secondHighest = schoolStandards[i];
-        } else if (schoolStandards[i].value < lowest.value) {
-            secondLowest = lowest;
-            lowest = schoolStandards[i];
-        } else if (schoolStandards[i].value < secondLowest.value) {
-            secondLowest = schoolStandards[i];
-        }
+    function addIndexesToRawData () {
+        _barChartData.rawData.forEach(function (item, index) {
+            item.index = index;
+        });
     }
+    addIndexesToRawData();
+    console.log(_barChartData.rawData);
 
-    var highActivityDataset = [highest, secondHighest];
-    var lowActivityDataset = [lowest, secondLowest];
-
+    // add 'data' property to format datasets for highcharts
     function groomDataForHighcharts (dataset) {
         dataset.forEach(function (item) {
             item.data = [item.value];
         });
+        return dataset;
     }
-    
-    groomDataForHighcharts(highActivityDataset);
-    groomDataForHighcharts(lowActivityDataset);
 
-    _barChartData.highActivityDataset = highActivityDataset;
-    _barChartData.lowActivityDataset = lowActivityDataset;
-    _barChartData.yAxisMaxHighActivity = 1.5 * highest.value;
-    _barChartData.yAxisMaxLowActivity = 4 * secondLowest.value;
+    // var highActivityDataset, lowActivityDataset;
+    var highest, secondHighest, lowest, secondLowest;
+
+    _barChartData.getDataForBuilding = function (activeIndex) {
+        var schoolStandards = _barChartData.rawData[activeIndex].standards;
+        highest = schoolStandards[0];
+        secondHighest = schoolStandards[0];
+        lowest = schoolStandards[0];
+        secondLowest = schoolStandards[0];
+
+        for (var i = 1; i < schoolStandards.length; i++) {
+            if (schoolStandards[i].value > highest.value) {
+                secondHighest = highest;
+                highest = schoolStandards[i];
+            } else if (schoolStandards[i].value > secondHighest.value) {
+                secondHighest = schoolStandards[i];
+            } else if (schoolStandards[i].value < lowest.value) {
+                secondLowest = lowest;
+                lowest = schoolStandards[i];
+            } else if (schoolStandards[i].value < secondLowest.value) {
+                secondLowest = schoolStandards[i];
+            }
+        }
+
+        // groomDataForHighcharts(highActivityDataset);
+        // groomDataForHighcharts(lowActivityDataset);
+
+        _barChartData.activeIndex = activeIndex;
+        _barChartData.highActivityDataset = groomDataForHighcharts([highest, secondHighest]);
+        _barChartData.lowActivityDataset = groomDataForHighcharts([lowest, secondLowest]);
+        console.log(_barChartData.highActivityDataset, _barChartData.lowActivityDataset);
+        _barChartData.yAxisMaxHighActivity = 1.5 * highest.value;
+        _barChartData.yAxisMaxLowActivity = 4 * secondLowest.value;
+    }
+
+    // show data for the first building in the list by default
+    _barChartData.getDataForBuilding(0);
+
+    // _barChartData.activeIndex = activeIndex;
+    // _barChartData.highActivityDataset = highActivityDataset;
+    // _barChartData.lowActivityDataset = lowActivityDataset;
     _barChartData.highActivityColors = ["#5C90CD", "#DC7247"];
     _barChartData.lowActivityColors = ["#E9C238", "#23D3D3"];
 

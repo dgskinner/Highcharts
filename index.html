@@ -19,14 +19,31 @@
             <highchart config="chartOptions" class="donut-chart-container"></highchart>
         </div>
 
-        <h1 class="standards-widget-title">ACTIVITIES BY STANDARD</h1>
-        <h2 class="standards-widget-subtitle">Number of Activities Per Standard</h2>
-        <div ng-controller="highActivityBarChartController">
-            <highchart config="chartOptions" class="bar-chart-container"></highchart>
-        </div>
-        <div class="bar-chart-divider"></div>
-        <div ng-controller="lowActivityBarChartController">
-            <highchart config="chartOptions" class="bar-chart-container"></highchart>
+        <div ng-controller="barChartsController">
+
+
+            <div class="widget-title-block">
+                <h1 class="widget-title">ACTIVITIES BY STANDARD</h1>
+                <h2 class="widget-subtitle">Number of Activities Per Standard</h2>
+            </div>
+            <!-- <div ng-controller="barChartSelectController"> -->
+                <!-- <label for="buildingSelect">Select a Building</label> -->
+                <select ng-options="option.buildingName for option in barChartData.rawData track by option.index"
+                    ng-init="something = something || barChartData.rawData[0]"
+                    ng-model="something"
+                    ng-change="changeBuildingData(something)">
+<!--                     <option ng-repeat="item in dataset" value="">{{ item.buildingName }}</option> -->
+                </select>
+            <!-- </div> -->
+            <!-- <div ng-controller="highActivityBarChartController"> -->
+                <highchart config="highActivityBarChartOptions"
+                    refresh-event-name="duncan"
+                    class="bar-chart-container"></highchart>
+            <!-- </div> -->
+            <div class="bar-chart-divider"></div>
+            <div ng-controller="lowActivityBarChartController">
+                <highchart config="chartOptions" class="bar-chart-container"></highchart>
+            </div>
         </div>
     </body>
 </html>
