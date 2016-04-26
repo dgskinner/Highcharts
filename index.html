@@ -17,10 +17,6 @@
     </head>
 
     <body ng-app="highchartsApp">
-        <div ng-controller="donutChartController">
-            <highchart config="chartOptions" class="donut-chart-container"></highchart>
-        </div>
-
         <div ng-controller="barChartsController" class="widget-container">
             <div class="widget-title-container">
                 <h1 class="widget-title">ACTIVITIES BY STANDARD</h1>
@@ -40,11 +36,15 @@
             </highchart>
 
             <div class="bar-chart-divider"></div>
-            
+
             <highchart config="lowActivityBarChartOptions"
                 refresh-event-name="lowActivityBarChartRefresh"
                 class="bar-chart-container">
             </highchart>
+        </div>
+
+        <div ng-controller="donutChartController" class="widget-container">
+            <highchart config="chartOptions" class="donut-chart-container"></highchart>
         </div>
     </body>
 </html>
