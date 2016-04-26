@@ -2,15 +2,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+
         <script type="text/javascript" src="https://code.angularjs.org/1.4.9/angular.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="barChartOptions.js"></script>
         <script type="text/javascript" src="globalHighchartOptions.js"></script>
         <script type="text/javascript" src="donutChartDataService.js"></script>
-        <script type="text/javascript" src="donutChartController.js"></script>
         <script type="text/javascript" src="barChartDataService.js"></script>
-        <script type="text/javascript" src="highActivityBarChartController.js"></script>
+        <script type="text/javascript" src="highchartDirective.js"></script>
+        <script type="text/javascript" src="donutChartController.js"></script>
+        <script type="text/javascript" src="barChartsController.js"></script>
     </head>
 
     <body ng-app="highchartsApp">
@@ -19,33 +22,29 @@
         </div>
 
         <div ng-controller="barChartsController" class="widget-container">
-
-
             <div class="widget-title-container">
                 <h1 class="widget-title">ACTIVITIES BY STANDARD</h1>
                 <h2 class="widget-subtitle">Number of Activities Per Standard</h2>
             </div>
-            <!-- <div ng-controller="barChartSelectController"> -->
-                <!-- <label for="buildingSelect">Select a Building</label> -->
-                <select ng-options="option.buildingName for option in barChartData.rawData track by option.index"
-                    ng-init="something = something || barChartData.rawData[0]"
-                    ng-model="something"
-                    ng-change="changeBuildingData(something)"
-                    class="building-select">
-<!--                     <option ng-repeat="item in dataset" value="">{{ item.buildingName }}</option> -->
-                </select>
-            <!-- </div> -->
-            <!-- <div ng-controller="highActivityBarChartController"> -->
-                <highchart config="highActivityBarChartOptions"
-                    refresh-event-name="highActivityBarChartRefresh"
-                    class="bar-chart-container"></highchart>
-            <!-- </div> -->
+
+            <select ng-options="option.buildingName for option in barChartData.rawData track by option.index"
+                ng-init="something = something || barChartData.rawData[0]"
+                ng-model="something"
+                ng-change="changeBuildingData(something)"
+                class="building-select">
+            </select>
+
+            <highchart config="highActivityBarChartOptions"
+                refresh-event-name="highActivityBarChartRefresh"
+                class="bar-chart-container">
+            </highchart>
+
             <div class="bar-chart-divider"></div>
-            <!-- <div ng-controller="lowActivityBarChartController"> -->
-                <highchart config="lowActivityBarChartOptions"
-                    refresh-event-name="lowActivityBarChartRefresh"
-                    class="bar-chart-container"></highchart>
-            <!-- </div> -->
+            
+            <highchart config="lowActivityBarChartOptions"
+                refresh-event-name="lowActivityBarChartRefresh"
+                class="bar-chart-container">
+            </highchart>
         </div>
     </body>
 </html>

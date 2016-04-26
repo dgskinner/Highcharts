@@ -11,7 +11,6 @@ app.service("donutChartDataService", function () {
         ["Other", 78]
     ];
 
-    // if we use ES2015, these should really be declared as constants
     _donutChartData.chartColors = ["#E9C238", "#5C90CD", "#23D3D3", "#ED8F35", "#DC7247", "#A5E069"];
     _donutChartData.chartTitle = "COST TYPE BREAKDOWN";
     _donutChartData.chartSubtitle = "Total Spent and Budget Breakdown";
